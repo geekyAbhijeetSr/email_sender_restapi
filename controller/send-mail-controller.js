@@ -1,19 +1,19 @@
 const nodemailer = require('nodemailer')
 const HttpError = require('../error/HttpError')
 
+const mailTransporter = nodemailer.createTransport({
+	host: process.env.HOST,
+	port: 465,
+	secure: true,
+	auth: {
+		user: process.env.EMAIL,
+		pass: process.env.EMAIL_PASSWORD,
+	},
+})
+
 const sendMailController = async (req, res, next) => {
 	try {
 		const { name, email, message } = req.body
-
-		const mailTransporter = nodemailer.createTransport({
-			host: process.env.HOST,
-			port: 465,
-			secure: true,
-			auth: {
-				user: process.env.EMAIL,
-				pass: process.env.EMAIL_PASSWORD,
-			},
-		})
 
 		const mailDetails = {
 			from: process.env.EMAIL,
