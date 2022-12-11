@@ -10,9 +10,11 @@ const PORT = process.env.PORT || 5000
 
 app.use(helmet())
 app.use(express.json())
-app.use(cors({
-	origin: ['http://localhost:3000']
-}))
+app.use(
+	cors({
+		origin: [process.env.ORIGIN],
+	})
+)
 
 app.post('/sendmail', sendMailValidation, validate, sendMailController)
 
